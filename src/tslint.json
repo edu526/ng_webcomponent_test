@@ -4,13 +4,13 @@
         "directive-selector": [
             true,
             "attribute",
-            "ng-chile",
+            "app",
             "camelCase"
         ],
         "component-selector": [
             true,
             "element",
-            "ng-chile",
+            "app",
             "kebab-case"
         ]
     }

@@ -1,17 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'ng-chile-dog-of-the-day',
-  template: `
+	selector: 'app-wc1',
+	template: `
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
     <div class="component_container">
       <h1>{{message}}</h1>
       <img src="{{imagen}}" *ngIf="imagen"/>
     </div>
   `,
-  styles: [`
+	styles: [`
     .component_container {
       font-family: 'Nanum Pen Script', cursive;
       width: 580px;
@@ -26,20 +26,20 @@ import { environment } from '../../environments/environment';
       height: auto;
     }
   `],
-  encapsulation: ViewEncapsulation.Native
+	encapsulation: ViewEncapsulation.Emulated
 })
-export class DogOfTheDayComponent implements OnInit {
+export class WC1Component implements OnInit {
 
-  public imagen;
-  public message = 'Dog of The Day';
+	public imagen;
+	@Input() message = 'Dog of The Day';
 
-  constructor(
-    public http: HttpClient
-  ) { }
+	constructor(
+		public http: HttpClient
+	) { }
 
-  ngOnInit() {
-    this.http.get(environment.api_url).subscribe((dotd: any) => {
-      this.imagen = dotd.message;
-    });
-  }
+	ngOnInit() {
+		this.http.get(environment.api_url).subscribe((dotd: any) => {
+			this.imagen = dotd.message;
+		});
+	}
 }

@@ -1,19 +1,17 @@
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { createCustomElement } from '@angular/elements';
-import { DogOfTheDayComponent } from './dog-of-the-day/dog-of-the-day.component';
+
+import { AppComponent } from './app.component';
+
 @NgModule({
-  declarations: [DogOfTheDayComponent],
-  imports: [BrowserModule, HttpClientModule],
-  entryComponents: [DogOfTheDayComponent]
+	declarations: [
+		AppComponent
+	],
+	imports: [
+		BrowserModule
+	],
+	providers: [],
+	bootstrap: [AppComponent],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule {
-  constructor(
-    private injector: Injector
-  ) {
-    const imagenEspacio = createCustomElement(DogOfTheDayComponent, { injector });
-    customElements.define('ng-chile-dotd', imagenEspacio);
-  }
-  ngDoBootstrap() { }
-}
+export class AppModule { }

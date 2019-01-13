@@ -28,5 +28,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Compiler production mode Web component
 ```
-$ ng generate component dog-of-the-day --inline-style --inline-template --view-encapsulation Native
+$ ng build --project=wc1 --prod --output-hashing=none && cat dist/wc1/{runtime,polyfills,scripts,main}.js > src/assets/ng-elements/wc1.js
 ```
+
