@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-wc1',
@@ -38,8 +39,13 @@ export class WC1Component implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.http.get(environment.api_url).subscribe((dotd: any) => {
-			this.imagen = dotd.message;
-		});
+		this.getImage()
+			.subscribe((dotd: any) => {
+				this.imagen = dotd.message;
+			});
+	}
+
+	getImage(): Observable<string> {
+		return this.http.get<string>(environment.api_url);
 	}
 }

@@ -11,6 +11,28 @@
 </head>
 
 <body>
+
+	<!-- Polyfills for Browsers supporting
+		Custom Elements. Needed b/c we downlevel
+		to ES5. See: @webcomponents/custom-elements
+	-->
+	<script src="assets/deploy/native-shim.js"></script>
+
+	<!-- Polyfills for Browsers not supporting
+		Custom Elements. See: @webcomponents/custom-elements
+	-->
+	<script src="assets/deploy/custom-elements.min.js"></script>
+
+	<!-- Rx -->
+	<script src="assets/deploy/rxjs.umd.js"></script>
+
+	<!-- Angular Packages -->
+	<script src="assets/deploy/core.umd.js"></script>
+	<script src="assets/deploy/common.umd.js"></script>
+	<script src="assets/deploy/common-http.umd.js"></script>
+	<script src="assets/deploy/platform-browser.umd.js"></script>
+	<script src="assets/deploy/elements.umd.js"></script>
+
 	<app-root></app-root>
 </body>
 

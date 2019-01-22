@@ -276,8 +276,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 			border-radius: 50%;
 			background-color: #6E64F0;
 		}
-  `],
-	encapsulation: ViewEncapsulation.Emulated
+  `]
+	// encapsulation: ViewEncapsulation.Emulated
 })
 export class WC2Component {
 

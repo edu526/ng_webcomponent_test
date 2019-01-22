@@ -13,7 +13,7 @@ export class AppComponent {
 		positionId: 'div1',
 		inputs: [{
 			key: 'message',
-			value: 'Prueba de Componente Web'
+			value: 'Prueba de Componente Web 2'
 		}]
 	};
 

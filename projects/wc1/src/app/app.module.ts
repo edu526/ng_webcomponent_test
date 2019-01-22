@@ -18,9 +18,9 @@ export class AppModule {
 
 	ngDoBootstrap() {
 		const name = 'first-app';
-		if (!customElements.get(name)) {
-			const element = createCustomElement(WC1Component, { injector: this.injector });
-			customElements.define(name, element);
-		}
+		// if (!customElements.get(name)) {
+		const element = createCustomElement(WC1Component, { injector: this.injector });
+		customElements.define(name, element);
+		// }
 	}
 }

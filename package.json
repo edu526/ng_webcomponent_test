@@ -9,8 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "wc:prod": "npm run wc1:prod && npm run wc2:prod",
-    "wc1:prod": "ng build --project=wc1 --prod --output-hashing=none && cat dist/wc1/{runtime,polyfills,scripts,main}.js > src/assets/ng-elements/wc1.js",
-    "wc2:prod": "ng build --project=wc2 --prod --output-hashing=none && cat dist/wc2/{runtime,polyfills,scripts,main}.js > src/assets/ng-elements/wc2.js"
+    "wc1:prod": "ng build --project wc1 --prod --extraWebpackConfig ../../webpack.externals.js --output-hashing none --single-bundle true && cat dist/wc1/main.js > src/assets/ng-elements/wc1.js",
+    "wc2:prod": "ng build --project wc2 --prod --extraWebpackConfig ../../webpack.externals.js --output-hashing none --single-bundle true && cat dist/wc2/main.js > src/assets/ng-elements/wc2.js"
   },
   "private": true,
   "dependencies": {
@@ -23,8 +23,10 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
+    "@webcomponents/custom-elements": "1.2.1",
     "core-js": "^2.5.4",
-    "document-register-element": "^1.7.2",
+    "document-register-element": "1.8.1",
+    "ngx-build-plus": "^7.7.2",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
@@ -38,6 +40,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
+    "copy": "0.3.2",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.1.1",
