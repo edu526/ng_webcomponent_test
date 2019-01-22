@@ -11,6 +11,7 @@ export class AppComponent {
 		tag: 'first-app',
 		file: 'wc1',
 		positionId: 'div1',
+		html: '<first-app message="Prueba de Componente Web 2"></first-app>',
 		inputs: [{
 			key: 'message',
 			value: 'Prueba de Componente Web 2'
@@ -20,6 +21,7 @@ export class AppComponent {
 	wc2: IWebComponent = {
 		tag: 'second-app',
 		file: 'wc2',
+		html: '<second-app></second-app>',
 		positionId: 'div2',
 	};
 
@@ -30,18 +32,19 @@ export class AppComponent {
 
 	addElementToRef(webCompoent: IWebComponent): void {
 		const content = document.getElementById(webCompoent.positionId);
-		const element = document.createElement(webCompoent.tag);
-		if (webCompoent.outputs) {
-			webCompoent.outputs.forEach(output => {
-				element.setAttribute(output.key, output.callback);
-			});
-		}
-		content.appendChild(element);
-		if (webCompoent.inputs) {
-			webCompoent.inputs.forEach(input => {
-				element.setAttribute(input.key, input.value);
-			});
-		}
+		content.insertAdjacentHTML('beforeend', webCompoent.html);
+		// const element = document.createElement(webCompoent.tag);
+		// if (webCompoent.outputs) {
+		// 	webCompoent.outputs.forEach(output => {
+		// 		element.setAttribute(output.key, output.callback);
+		// 	});
+		// }
+		// content.appendChild(element);
+		// if (webCompoent.inputs) {
+		// 	webCompoent.inputs.forEach(input => {
+		// 		element.setAttribute(input.key, input.value);
+		// 	});
+		// }
 	}
 
 	addScriptTag(fileName: string): void {
@@ -64,6 +67,7 @@ export interface IWebComponent {
 	tag: string;
 	file: string;
 	positionId: string;
+	html: string;
 	inputs?: Array<{ key: string, value: any }>;
 	outputs?: Array<{ key: string, callback: any }>;
 }
