@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { addScriptTag, addElementToRef } from 'utils/load-wc';
 
 @Component({
 	selector: 'app-wc1',
@@ -10,7 +11,8 @@ import { Observable } from 'rxjs';
     <div class="component_container">
       <h1>{{message}}</h1>
       <img src="{{imagen}}" *ngIf="imagen"/>
-    </div>
+		</div>
+		<div id="first_app_div2"></div>
   `,
 	styles: [`
     .component_container {
@@ -34,6 +36,12 @@ export class WC1Component implements OnInit {
 	public imagen;
 	@Input() message = 'Dog of The Day';
 
+	wc2 = {
+		file: 'wc2',
+		html: '<second-app></second-app>',
+		positionId: 'first_app_div2',
+	};
+
 	constructor(
 		public http: HttpClient
 	) { }
@@ -43,9 +51,15 @@ export class WC1Component implements OnInit {
 			.subscribe((dotd: any) => {
 				this.imagen = dotd.message;
 			});
+		this.addWebCompoent();
 	}
 
 	getImage(): Observable<string> {
 		return this.http.get<string>(environment.api_url);
+	}
+
+	addWebCompoent(): void {
+		addScriptTag(this.wc2.file);
+		addElementToRef(this.wc2);
 	}
 }
