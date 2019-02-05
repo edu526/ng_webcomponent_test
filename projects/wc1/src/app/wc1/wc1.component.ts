@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, Output, OnInit, ViewEncapsulation, Input, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -8,7 +8,7 @@ import { addScriptTag, addElementToRef } from 'utils/load-wc';
 	selector: 'app-wc1',
 	template: `
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
-    <div class="component_container">
+    <div class="component_container" (click)="emit()">
       <h1>{{message}}</h1>
       <img src="{{imagen}}" *ngIf="imagen"/>
 		</div>
@@ -35,6 +35,8 @@ export class WC1Component implements OnInit {
 
 	public imagen;
 	@Input() message = 'Dog of The Day';
+	@Input() anydata = [];
+	@Output() timer: EventEmitter<any> = new EventEmitter<any>();
 
 	wc2 = {
 		file: 'wc2',
@@ -44,9 +46,12 @@ export class WC1Component implements OnInit {
 
 	constructor(
 		public http: HttpClient
-	) { }
+	) {
+	}
 
 	ngOnInit() {
+		console.log(this.anydata);
+		console.log(this.message);
 		this.getImage()
 			.subscribe((dotd: any) => {
 				this.imagen = dotd.message;
@@ -61,5 +66,10 @@ export class WC1Component implements OnInit {
 	addWebCompoent(): void {
 		addScriptTag(this.wc2.file);
 		addElementToRef(this.wc2);
+	}
+
+	emit(): void {
+		this.timer.next(new Date().toISOString());
+		console.log('emit');
 	}
 }

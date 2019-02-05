@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer } from '@angular/core';
 import { addScriptTag, addElementToRef, IWebComponent } from 'utils/load-wc';
 
 @Component({
@@ -12,11 +12,23 @@ export class AppComponent {
 		tag: 'first-app',
 		file: 'wc1',
 		positionId: 'div1',
-		html: '<first-app message="Prueba de Componente Web 2"></first-app>',
-		inputs: [{
-			key: 'message',
-			value: 'Prueba de Componente Web 2'
-		}]
+		html: '<first-app message="Prueba de Componente Web 2" anydata="[1, 2, 3]" timer="timer($event)"></first-app>',
+		inputs: [
+			{
+				key: 'message',
+				value: 'Prueba de Componente Web 2'
+			},
+			{
+				key: 'anydata',
+				value: [1, 2, 3]
+			}
+		],
+		outputs: [
+			{
+				key: 'timer',
+				callback: this.timer
+			}
+		]
 	};
 
 	wc2: IWebComponent = {
@@ -26,9 +38,17 @@ export class AppComponent {
 		positionId: 'div2',
 	};
 
+	constructor(
+		private renderer: Renderer
+	){}
+
 	addWebCompoent(webCompoent: IWebComponent): void {
 		addScriptTag(webCompoent.file);
-		addElementToRef(webCompoent);
+		addElementToRef(webCompoent, this.renderer);
+	}
+
+	timer(data): void {
+		console.log(data);
 	}
 
 }

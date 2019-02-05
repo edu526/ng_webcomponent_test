@@ -1,17 +1,24 @@
-export const addElementToRef = (webCompoent: IWebComponent): void => {
+import { Renderer } from '@angular/core';
+
+export const addElementToRef = (webCompoent: IWebComponent, renderer?: Renderer): void => {
 	const content = document.getElementById(webCompoent.positionId);
-	content.insertAdjacentHTML('beforeend', webCompoent.html);
-	// const element = document.createElement(webCompoent.tag);
-	// if (webCompoent.outputs) {
-	// 	webCompoent.outputs.forEach(output => {
-	// 		element.setAttribute(output.key, output.callback);
-	// 	});
-	// }
-	// content.appendChild(element);
-	// if (webCompoent.inputs) {
-	// 	webCompoent.inputs.forEach(input => {
-	// 		element.setAttribute(input.key, input.value);
-	// 	});
+	// content.insertAdjacentHTML('beforeend', webCompoent.html);
+	// if (renderer) {
+	// 	renderer.invokeElementMethod(content, 'insertAdjacentHTML', ['beforeend', webCompoent.html]);
+
+	// } else {
+		const element = document.createElement(webCompoent.tag);
+		if (webCompoent.outputs) {
+			webCompoent.outputs.forEach(output => {
+				element.setAttribute(output.key, output.callback);
+			});
+		}
+		if (webCompoent.inputs) {
+			webCompoent.inputs.forEach(input => {
+				element[input.key] = input.value;
+			});
+		}
+		setTimeout(() => content.appendChild(element));
 	// }
 };
 
