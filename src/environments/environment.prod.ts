@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  api_url: 'https://dog.ceo/api/breeds/image/random'
+	production: true,
+	apiUrl: 'http://localhost:4200/assets/'
 };

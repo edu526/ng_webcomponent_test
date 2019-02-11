@@ -3,11 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { addScriptTag, addElementToRef } from 'utils/load-wc';
+import { IAppState } from 'src/app/store/state/app.state';
+import { Store, select } from '@ngrx/store';
+import { selectConfig } from 'src/app/store/selectors/config.sekectors';
 
 @Component({
 	selector: 'app-wc1',
 	template: `
-    <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
+		<h1>{{ (config$ | async)?.adminName }}</h1>
     <div class="component_container">
       <h1>{{message}}</h1>
       <img src="{{imagen}}" *ngIf="imagen"/>
@@ -42,7 +46,10 @@ export class WC1Component implements OnInit {
 		positionId: 'first_app_div2',
 	};
 
+	config$ = this._store.pipe(select(selectConfig));
+
 	constructor(
+		private _store: Store<IAppState>,
 		public http: HttpClient
 	) { }
 
@@ -51,7 +58,7 @@ export class WC1Component implements OnInit {
 			.subscribe((dotd: any) => {
 				this.imagen = dotd.message;
 			});
-		this.addWebCompoent();
+		// this.addWebCompoent();
 	}
 
 	getImage(): Observable<string> {

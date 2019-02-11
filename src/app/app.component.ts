@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { addScriptTag, addElementToRef, IWebComponent } from 'utils/load-wc';
+import { Store, select } from '@ngrx/store';
+import { IAppState } from './store/state/app.state';
+import { GetConfig } from './store/actions/config.actions';
+import { selectConfig } from './store/selectors/config.sekectors';
 
 @Component({
 	selector: 'app-root',
@@ -26,7 +30,17 @@ export class AppComponent {
 		positionId: 'div2',
 	};
 
+	config$ = this._store.pipe(select(selectConfig));
+
+	constructor(
+		private _store: Store<IAppState>
+	) { }
+
+	ngOnInint(): void {
+	}
+
 	addWebCompoent(webCompoent: IWebComponent): void {
+		this._store.dispatch(new GetConfig());
 		addScriptTag(webCompoent.file);
 		addElementToRef(webCompoent);
 	}

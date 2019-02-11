@@ -413,7 +413,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.rxjs = global.rxjs || {})));
+	(factory((global.Rx = global.rxjs = global.rxjs || {})));
 }(this, (function (exports) { 'use strict';
 
 /*! *****************************************************************************

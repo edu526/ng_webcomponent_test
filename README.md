@@ -31,3 +31,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 $ ng build --project=wc1 --prod --output-hashing=none && cat dist/wc1/{runtime,polyfills,scripts,main}.js > src/assets/ng-elements/wc1.js
 ```
 
+https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc
